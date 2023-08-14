@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>satus</title>
+<style>
+  body 
+  {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  
+  #n{
+   font-size:5em;
+  
+  position:absolute;
+  top:50%;
+ 
+ 
+  }
+#bodys{
+
+color:white;
+}
+</style>
+</head>
+<body bgcolor="black">
+  <!-- Your content goes here -->
+  <div id="bodys">
+  <div id="yu"></div>
+  <audio  id="bgAudio">
+    <source src="van.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  
+  <div id="input">
+  <form id="signupForm">
+  <label for="name"><b>what does he call you as ??</b></label>
+<input type="text" id="name" name="data[Name]"/>
+<br>
+   <button type="submit" class="signupbtn" id="signupbtn">play</button>
+  </form>
+  </div>
+  </div>
+  <div id="n">
+  <div style="display:none; color:#FF9933;"  left:10% id="w1" >Happy </div>
+    <div style="display:none; color:white;  left:10%" id="w2" >Idependence Day</div>
+  <div id="na"style=" color:green;  left:1%"></div>
+
+  
+</div>
+  <div style="display:none; color:white; position:absolute;  top:90%; left:90%" id="w3" >by AMITH KUMAR</div>
+</body>
+  <script>
+  
+    const bgAudio = document.getElementById("bgAudio");
+let x = document.getElementById("name");
+	function start()
+
+	{
+		
+
+	
+      bgAudio.play();
+      var imageUrl = "360.jpg";
+      document.body.style.backgroundImage = "url('" + imageUrl + "')";
+	  document.getElementById("input").style.display="none";
+	  document.getElementById("w1").style.display="block";
+	  	  document.getElementById("w2").style.display="block";
+	     document.getElementById("w3").style.display="block";
+	   
+	  let y=x.value;
+	  document.getElementById("na").innerHTML = y;
+	  
+	      
+	  	
+    }
+
+   
+	
+ bgAudio.addEventListener('ended', () => {
+    // When the audio ends, navigate to another page
+    location.href = "page2.html";
+});
+	
+    document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+
+            var name = document.querySelector('input[name="data[Name]"]').value;
+
+            // Create an object to hold the form data
+            var formData = {
+                "data": {
+                    "Name": name
+                }
+            };
+
+            // Send the form data to the API
+            fetch('https://sheetdb.io/api/v1/tq6fq0moukta4', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                start(); // Handle the API response as needed
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    
+  </script>
+
+</html>

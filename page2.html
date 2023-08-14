@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>end
+</title>
+<style>
+#bodyss{
+background-color:black;
+color:white;
+}
+</style>
+</head>
+<body bgcolor="black">
+<div id="bodyss">
+<div id="fed">
+<form action="index.html">
+<input type="submit"  value="TRY again">
+</form>
+<hr>
+<form id="signupForm">
+<p id="Enter feedback">
+<label for="name"><b>Enter name</b></label>
+
+<input type="name" name="data[Name]"><br><br>
+<label for="name"><b>Enter feedback</b></label>
+<textarea name="data[feed]"></textarea>
+ <button type="submit" class="signupbtn" id="signupbtn">Sign Up</button>
+</div>
+</form>
+<script>
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+
+            var name = document.querySelector('input[name="data[Name]"]').value;
+			var feed = document.querySelector('textarea[name="data[feed]"]').value;
+
+            // Create an object to hold the form data
+            var formData = {
+                "data": {
+                    "Name": name,
+					"feed":feed
+                }
+            };
+
+            // Send the form data to the API
+            fetch('https://sheetdb.io/api/v1/tq6fq0moukta4', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                fun(); // Handle the API response as needed
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+        function fun()
+        {
+      alert("sent");
+        
+        }
+</script>
+</div>
+</body>
+</html>
